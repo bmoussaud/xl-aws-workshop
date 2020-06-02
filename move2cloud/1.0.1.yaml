@@ -1,0 +1,64 @@
+---
+apiVersion: xl-deploy/v1
+kind: Applications
+spec:
+- directory: Applications/move2cloud/my-portal
+  children:
+  - name: my-portal-aws
+    type: udm.Application
+    children:
+    - name: 1.0.1
+      type: udm.DeploymentPackage
+      deployables:
+      - name: my-portal-security-group
+        type: aws.vpc.SecurityGroupSpec
+        securityGroupName: my-portal-security-group
+        description: SG for MyPortal
+        region: eu-west-3
+        inboundRules:
+        - name: ssh
+          type: aws.vpc.SecurityGroupInboundRuleSpec
+          protocol: TCP
+          portRange: "22"
+          source: 0.0.0.0/0
+        - name: http
+          type: aws.vpc.SecurityGroupInboundRuleSpec
+          protocol: TCP
+          portRange: "8080"
+          source: 0.0.0.0/0
+      - name: front-ami
+        type: aws.ec2.InstanceSpec
+        amiId: ami-08c757228751c5335
+        region: eu-west-3
+        securityGroup:
+          - my-portal-security-group
+        instanceType: t2.micro
+        keyName: my-portal-kp-custom-key-pair
+        instanceTags:
+          kind: '{{env}}'
+      - name: middleware-ami
+        type: aws.ec2.InstanceSpec
+        amiId: ami-08c757228751c5335
+        region: eu-west-3
+        securityGroup:
+        - my-portal-security-group
+        instanceType: t2.micro
+        keyName: my-portal-kp-custom-key-pair
+        instanceTags:
+          kind: '{{env}}'
+      - name: db-ami
+        type: aws.ec2.InstanceSpec
+        amiId: ami-08c757228751c5335
+        region: eu-west-3
+        securityGroup:
+        - my-portal-security-group
+        instanceType: t2.micro
+        keyName: my-portal-kp-custom-key-pair
+        instanceTags:
+          kind: '{{env}}'
+      - name: my-portal-kp
+        type: aws.cloudformation.Template
+        generateCIsFromResources: False
+        capabilities:
+        - CAPABILITY_NAMED_IAM
+        file: !file "artifacts/1.0.1/demo-stack.yaml"

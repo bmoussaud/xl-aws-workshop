@@ -1,0 +1,7 @@
+apiVersion: xl/v1
+kind: Import
+metadata:
+ imports:
+   - utils.yaml
+   - 1.0.0.yaml
+   - 1.0.1.yaml
