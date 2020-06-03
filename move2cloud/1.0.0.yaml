@@ -33,12 +33,11 @@ spec:
         securityGroup:
           - my-portal-security-group
         instanceType: t2.micro
-        keyName: my-portal-kp-custom-key-pair
+        keyName: my-portal-keypair-{{env}}
         instanceTags:
           kind: '{{env}}'
       - name: my-portal-kp
-        type: aws.cloudformation.Template
-        generateCIsFromResources: False
-        capabilities:
-        - CAPABILITY_NAMED_IAM
-        file: !file "artifacts/1.0.0/demo-stack.yaml"
+        type: aws.ec2.KeyPairSpec
+        region: eu-west-3
+        keyPairName: my-portal-keypair-{{env}}
+        pemFilePath: ./ssh/my-portal-keypair-{{env}}.pem

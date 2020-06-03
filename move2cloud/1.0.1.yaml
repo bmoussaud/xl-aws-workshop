@@ -9,6 +9,14 @@ spec:
     children:
     - name: 1.0.1
       type: udm.DeploymentPackage
+      templates:
+      - name: template-vm
+        type: template.overthere.SshHost
+        instanceName: host-{{%publicHostname%}}
+        os: UNIX
+        address: '{{%publicHostname%}}'
+        username: ubuntu
+        privateKeyFile: ./ssh/my-portal-keypair-{{env}}.pem
       deployables:
       - name: my-portal-security-group
         type: aws.vpc.SecurityGroupSpec
@@ -26,39 +34,20 @@ spec:
           protocol: TCP
           portRange: "8080"
           source: 0.0.0.0/0
-      - name: front-ami
+      - name: my-portal-instance
         type: aws.ec2.InstanceSpec
         amiId: ami-08c757228751c5335
         region: eu-west-3
         securityGroup:
           - my-portal-security-group
         instanceType: t2.micro
-        keyName: my-portal-kp-custom-key-pair
+        keyName: my-portal-keypair-{{env}}
         instanceTags:
           kind: '{{env}}'
-      - name: middleware-ami
-        type: aws.ec2.InstanceSpec
-        amiId: ami-08c757228751c5335
-        region: eu-west-3
-        securityGroup:
-        - my-portal-security-group
-        instanceType: t2.micro
-        keyName: my-portal-kp-custom-key-pair
-        instanceTags:
-          kind: '{{env}}'
-      - name: db-ami
-        type: aws.ec2.InstanceSpec
-        amiId: ami-08c757228751c5335
-        region: eu-west-3
-        securityGroup:
-        - my-portal-security-group
-        instanceType: t2.micro
-        keyName: my-portal-kp-custom-key-pair
-        instanceTags:
-          kind: '{{env}}'
+        boundTemplates:
+        - ../template-vm
       - name: my-portal-kp
-        type: aws.cloudformation.Template
-        generateCIsFromResources: False
-        capabilities:
-        - CAPABILITY_NAMED_IAM
-        file: !file "artifacts/1.0.1/demo-stack.yaml"
+        type: aws.ec2.KeyPairSpec
+        region: eu-west-3
+        keyPairName: my-portal-keypair-{{env}}
+        pemFilePath: ./ssh/my-portal-keypair-{{env}}.pem
