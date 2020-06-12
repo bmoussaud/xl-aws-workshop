@@ -19,7 +19,12 @@ spec:
       securityGroup:
       - Name:tomcat-security-group
       instanceType: t2.micro
-      keyName: adlere-seminaire
+      keyName: my-app-keypair
+    - name: my-app-kp
+      type: aws.ec2.KeyPairSpec
+      keyPairName: my-app-keypair
+      region: eu-west-3
+      pemFilePath: ssh-keypairs/myapp-keypair.pem
     - name: tomcat-sg
       type: aws.vpc.SecurityGroupSpec
       securityGroupName: tomcat-security-group
