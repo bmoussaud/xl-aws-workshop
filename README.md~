@@ -6,6 +6,7 @@ on the XLDeploy Server
 * install [xld-aws-keypair-plugin](./plugins/xld-aws-keypair-plugin-0.0.1.jar)
 * restart XLDeploy Server
 * install [XL-CLI](https://dist.xebialabs.com/public/xl-cli/9.6.2/) depending of the running platform (Linux,Windows or MacOS)
+* create the ssh-keypari directory in xl-deploy installation folder
 
 ## Actions
 * apply the Devops-as-code defintions containing the deployment package

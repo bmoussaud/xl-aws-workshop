@@ -15,5 +15,7 @@ on the XLDeploy Server
 ```
 xl apply -f xebialabs/ansible-controler.yaml
 ``` 
+* edit CI Applications/ansible-controller/1.0.0/ansible-host-template/ansible-controler-template devops properties
+
 
 
