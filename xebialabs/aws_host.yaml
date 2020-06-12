@@ -51,5 +51,5 @@ spec:
       connectionType: SUDO
       address: '{{%publicHostname%}}'
       username: ubuntu
-      privateKeyFile: /Users/bmoussaud/.ssh/adlere-seminaire.pem
+      privateKeyFile: ssh-keypairs/myapp-keypair.pem
       sudoUsername: root
