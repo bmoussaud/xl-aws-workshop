@@ -3,7 +3,7 @@
 ### Setup
 on the XLDeploy Server
 * install [xld-ansible-step-plugin](https://github.com/xebialabs-community/xld-ansible-step-plugin/releases/download/v1.1.0-rc.7/xld-ansible-step-plugin-1.1.0-rc.7.xldp)
-* install [xld-aws-keypair-plugin](./plugins/xld-aws-keypair-plugin-0.0.1.jar)
+* install [xld-aws-keypair-plugin](./plugins/xld-aws-ec2-keypair-plugin-0.0.2.jar)
 * install https://github.com/xebialabs-community/overthere-pylib/releases/download/v0.0.4/overtherepy-0.0.4.jar
 * restart XLDeploy Server
 * install [XL-CLI](https://dist.xebialabs.com/public/xl-cli/9.6.2/) depending of the running platform (Linux,Windows or MacOS)
