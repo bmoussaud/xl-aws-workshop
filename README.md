@@ -13,7 +13,7 @@ on the XLDeploy Server
 * apply the Devops-as-code defintions containing the deployment package for ansible controlleur
 
 ```
-xl apply -f xebialabs/ansible-controler.yaml
+xl apply -f xebialabs/ansible_controler.yaml
 ``` 
 * edit CI Applications/ansible-controller/1.0.0/ansible-host-template/ansible-controler-template devops properties
 * deploy this package in an environmnet containing an aws.Cloud Configuration item

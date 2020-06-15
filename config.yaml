@@ -15,7 +15,7 @@ blueprint-repository:
 xl-deploy:
   authmethod: http
   password: admin
-  url: http://localhost:4516
+  url: http://localhost:4543
   username: admin
 xl-release:
   authmethod: http
