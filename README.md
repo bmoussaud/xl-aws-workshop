@@ -141,3 +141,10 @@ in XLRelease, we'll design a template to orchestrate the tasks to provision and 
 
 ![image](images/schema-7.png)
 
+
+### Orchestration - phase 4
+
+Create a template that orchestrates 3 tasks to undeploy and to unprovision the stack.
+Tips: use the `xldeploy:undeploy` task.
+
+![image](images/schema-8.png)
