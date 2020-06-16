@@ -108,3 +108,36 @@ in XLRelease, we'll design a template to orchestrate the tasks to provision and 
 ![image](images/schema-4.png)
 
 
+
+### Orchestration - phase 2
+
+* Duplicate the `Phase 1` and rename it `Phase 2`
+* Edit the deployment task with the following properties
+  * Title: Install tomcat app server
+  * Application: Applications/java-server-application
+  * Version: 0.1.1
+* Edit the manual task with the following properties
+  * Title: Connect to the tomcat console
+  * Description: using your browser, connect to <http://public_ip_of_machine:8080>
+* Create new release called `run-3`
+
+![image](images/schema-5.png)
+
+### Orchestration - phase 3
+
+* Duplicate the `Phase 1` and rename it `Phase 3`
+* Edit the deployment task with the following properties
+  * Title: Deploy the application
+  * Application: Applications/PetClinic-war
+  * Version: 1.0
+* Edit the manual task with the following properties
+  * Title: Connect to the petclinic app
+  * Description: using your browser, connect to <http://public_ip_of_machine:8080>
+
+![image](images/schema-6.png)
+
+* Create new release called `run-5`
+  * skip the 2 first manual tasks
+
+![image](images/schema-7.png)
+
