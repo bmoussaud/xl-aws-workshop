@@ -9,8 +9,9 @@ on the machine running the XLDeploy Server.
 * install [overtherepy](https://github.com/xebialabs-community/overthere-pylib/releases/download/v0.0.4/overtherepy-0.0.4.jar) plugin. Copy the file into $XL_DEPLOY_HOME/plugins directory.
 * restart XL Deploy Server
 * install [XL-CLI](https://dist.xebialabs.com/public/xl-cli/9.6.2/) depending of the running platform (Linux,Windows or MacOS). Copy the file into $XL_DEPLOY_HOME/xl-cli directory.[Devops As Code Documentation](https://docs.xebialabs.com/v.9.6/xl-release/concept/get-started-with-devops-as-code#get-started)
+* Fork or Download this repository. https://github.com/bmoussaud/xl-aws-workshop
 
-## Actions
+## Steps
 
 The workshop will setup the following stack:
 
@@ -68,5 +69,42 @@ xlw apply -f xebialabs/application_tomcat.yaml
   * the applications `xlw generate xl-deploy -p Applications -f app.yaml`
   * the environments `xlw generate xl-deploy -p Environments -f env.yaml`
 
+
+### Undeploy (TODO)
+
+* TODO
+
+### Orchestration - phase 1
+
+in XLRelease, we'll design a template to orchestrate the tasks to provision and to deploy a full stack.
+
+* Click in Design and add a folder `MyApp`
+* Click on the `Configuration` Tab and add an `XLDeploy Server`
+  * title : local xldeploy
+  * url: http://localhost:4516
+  * authentication method: `basic`
+  * provider username & password
+  * click Test to validate the parameters
+  * save.
+
+* Add a Template, provide a name `Provision & Deploy`, Click on the create button
+* Click on `New Phase` to rename it `Phase 1`
+* Add Task, Select XLDeploy:Deploy, and provide a title, for example `Provision & Deploy`
+  * Application: `Applications/aws-host``
+  * Version: `1.0.0`
+  * Environment: Fill with an environment you used previously
+  * Click on `Assign to me` link
+
+![image](images/schema-2.png)
+
+* Add Task, Select Core:Manuam, and provide a title, for example `check in the AWS console the new EC2 instance is up & ready`
+  * Description: Go to the AWS console, provide your credential and click on the EC2 Service.
+  * Click on `Assign to me` link
+
+![image](images/schema-3.png)
+
+* Create new release called `run-1`
+
+![image](images/schema-4.png)
 
 
