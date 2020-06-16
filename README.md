@@ -9,8 +9,9 @@ on the machine running the XLDeploy Server.
 * install [overtherepy](https://github.com/xebialabs-community/overthere-pylib/releases/download/v0.0.4/overtherepy-0.0.4.jar) plugin. Copy the file into $XL_DEPLOY_HOME/plugins directory.
 * restart XL Deploy Server
 * install [XL-CLI](https://dist.xebialabs.com/public/xl-cli/9.6.2/) depending of the running platform (Linux,Windows or MacOS). Copy the file into $XL_DEPLOY_HOME/xl-cli directory.[Devops As Code Documentation](https://docs.xebialabs.com/v.9.6/xl-release/concept/get-started-with-devops-as-code#get-started)
+* Fork or Download this repository. https://github.com/bmoussaud/xl-aws-workshop
 
-## Actions
+## Steps
 
 The workshop will setup the following stack:
 
@@ -69,4 +70,81 @@ xlw apply -f xebialabs/application_tomcat.yaml
   * the environments `xlw generate xl-deploy -p Environments -f env.yaml`
 
 
+### Undeploy (TODO)
 
+* TODO
+
+### Orchestration - phase 1
+
+in XLRelease, we'll design a template to orchestrate the tasks to provision and to deploy a full stack.
+
+* Click in Design and add a folder `MyApp`
+* Click on the `Configuration` Tab and add an `XLDeploy Server`
+  * title : local xldeploy
+  * url: http://localhost:4516
+  * authentication method: `basic`
+  * provider username & password
+  * click Test to validate the parameters
+  * save.
+
+* Add a Template, provide a name `Provision & Deploy`, Click on the create button
+* Click on `New Phase` to rename it `Phase 1`
+* Add Task, Select XLDeploy:Deploy, and provide a title, for example `Provision & Deploy`
+  * Application: `Applications/aws-host``
+  * Version: `1.0.0`
+  * Environment: Fill with an environment you used previously
+  * Click on `Assign to me` link
+
+![image](images/schema-2.png)
+
+* Add Task, Select Core:Manuam, and provide a title, for example `check in the AWS console the new EC2 instance is up & ready`
+  * Description: Go to the AWS console, provide your credential and click on the EC2 Service.
+  * Click on `Assign to me` link
+
+![image](images/schema-3.png)
+
+* Create new release called `run-1`
+
+![image](images/schema-4.png)
+
+
+
+### Orchestration - phase 2
+
+* Duplicate the `Phase 1` and rename it `Phase 2`
+* Edit the deployment task with the following properties
+  * Title: Install tomcat app server
+  * Application: Applications/java-server-application
+  * Version: 0.1.1
+* Edit the manual task with the following properties
+  * Title: Connect to the tomcat console
+  * Description: using your browser, connect to <http://public_ip_of_machine:8080>
+* Create new release called `run-3`
+
+![image](images/schema-5.png)
+
+### Orchestration - phase 3
+
+* Duplicate the `Phase 1` and rename it `Phase 3`
+* Edit the deployment task with the following properties
+  * Title: Deploy the application
+  * Application: Applications/PetClinic-war
+  * Version: 1.0
+* Edit the manual task with the following properties
+  * Title: Connect to the petclinic app
+  * Description: using your browser, connect to <http://public_ip_of_machine:8080>
+
+![image](images/schema-6.png)
+
+* Create new release called `run-5`
+  * skip the 2 first manual tasks
+
+![image](images/schema-7.png)
+
+
+### Orchestration - phase 4
+
+Create a template that orchestrates 3 tasks to undeploy and to unprovision the stack.
+Tips: use the `xldeploy:undeploy` task.
+
+![image](images/schema-8.png)
