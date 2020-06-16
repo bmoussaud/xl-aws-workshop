@@ -148,3 +148,16 @@ Create a template that orchestrates 3 tasks to undeploy and to unprovision the s
 Tips: use the `xldeploy:undeploy` task.
 
 ![image](images/schema-8.png)
+
+
+### Save your work as code
+
+```
+C:\xl-aws-workshop>xlw  --config config.yaml generate xl-release -t -o -p MyApp -f xebialabs/xlr_template_provision.yaml -n "Provision and Deploy"
+Generating definitions for path MyApp from XL Release to xebialabs/xlr_template_provision.yaml
+```
+
+```
+C:\xl-aws-workshop>xlw  --config config.yaml generate xl-release -t -o -p MyApp -f xebialabs/xlr_template_unprovision.yaml -n "Unprovision the stack"
+Generating definitions for path MyApp from XL Release to xebialabs/xlr_template_unprovision.yaml
+```
