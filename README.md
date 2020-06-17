@@ -22,12 +22,28 @@ The workshop will setup the following stack:
 * apply the Devops-as-code defintions containing the deployment package for ansible controller
 
 ```bash
-xl apply -f xebialabs/ansible_controler.yaml
+xlw apply -f xebialabs/aws_ansible_controller.yaml
 ```
 
 * edit CI Applications/ansible-controller/1.0.0/ansible-host-template/ansible-controler-template, to modify devops properties to match your current environment (devopsAsCodeUrl & xlPath)
-* deploy `Applications/ansible-controller/1.0.0` package in an environment containing an aws.Cloud Configuration item with your AWS credentials.
+
+* apply the Devops-as-code defintions containing the environment and infrastructure definition
+
+```bash
+xlw apply -f xebialabs/infrastructure.yaml
+xlw apply -f xebialabs/environment.yaml
+```
+
+* edit the `Infrastructure/aws cloud connection` accesskey and accessSecret properties with your AWS account settings. If you're using aws-cli you can find them in `~/.aws/credentials` file.
+
+* trigger the `check Connection` control task to validate the setting using `eu-west-3` as region parameter.
+
+![image](images/schema-9.png)
+
+* deploy `Applications/ansible-controller/1.0.0` package in an environment containing an aws.Cloud Configuration item with your AWS credentials (`Environments/test/aws test`)
+
 * Once deployed, in the Infrastructure,a new configuration item representing the Ansible controler has been created and added to the environment. It follows the following pattern 'Infrastructure/ansible-controlleur-{{%instanceId%}}-host'.
+* trigger the `check Connection` control task 
 
 ### Provision a new target host in AWS
 
@@ -39,10 +55,11 @@ xlw apply -f xebialabs/aws_host.yaml
 
 * deploy `Applications/aws-host/1.0.0` package in an environmnet containing an aws.Cloud Configuration item with your AWS credentials.
 * Once deployed, in the Infrastructure, a new Configuration representing the new EC2 instance has been created and added to the environment. it follows the following pattern 'Infrastructure/{{%instanceId%}}-host'.
+* trigger the `check Connection` control task to validate it.
 
 ### Provision tomcat using Ansible
 
-* apply the Devops-as-code defintions containing the deployment package containing the java-server-application package. 
+* apply the Devops-as-code defintions containing the deployment package containing the java-server-application package.
 
 ```bash
 xlw apply -f xebialabs/application_tomcat.yaml
