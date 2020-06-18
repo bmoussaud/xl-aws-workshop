@@ -89,7 +89,10 @@ xlw apply -f xebialabs/application_tomcat.yaml
 
 ### Undeploy (TODO)
 
-* TODO
+* Undeploy the PetClinic-war app (`Environments/test/aws test/PetClinic-war`)
+* Undeploy the java-server-application app (`Environments/test/aws test/java-server-application`)
+* Undeploy the aws-host app (`Environments/test/aws test/aws-host`)
+* Undepoy the ansible-controller app (`Environments/test/aws test/ansible-controller`) (you'll need during the orchestration section)
 
 ### Orchestration - phase 1
 
