@@ -4,7 +4,7 @@
 
 on the machine running the XLDeploy Server.
 
-* install [xld-ansible-step-plugin](https://github.com/xebialabs-community/xld-ansible-step-plugin/releases/download/v1.1.0-rc.8/xld-ansible-step-plugin-1.1.0-rc.8.xldp) plugin. Copy the file into $XL_DEPLOY_HOME/plugins directory.
+* install [xld-ansible-step-plugin](https://github.com/xebialabs-community/xld-ansible-step-plugin/releases/download/v1.1.0/xld-ansible-step-plugin-1.1.0.xldp) plugin. Copy the file into $XL_DEPLOY_HOME/plugins directory.
 * install [xld-aws-keypair-plugin](https://github.com/bmoussaud/xl-aws-workshop/blob/master/plugins/xld-aws-ec2-keypair-plugin-0.0.3.jar) plugin. Copy the file into $XL_DEPLOY_HOME/plugins directory.
 * install [overtherepy](https://github.com/xebialabs-community/overthere-pylib/releases/download/v0.0.4/overtherepy-0.0.4.jar) plugin. Copy the file into $XL_DEPLOY_HOME/plugins directory.
 * restart XL Deploy Server
@@ -86,8 +86,7 @@ xlw apply -f xebialabs/application_tomcat.yaml
   * the applications `xlw generate xl-deploy -p Applications -f app.yaml`
   * the environments `xlw generate xl-deploy -p Environments -f env.yaml`
 
-
-### Undeploy (TODO)
+### Undeploy
 
 * Undeploy the PetClinic-war app (`Environments/test/aws test/PetClinic-war`)
 * Undeploy the java-server-application app (`Environments/test/aws test/java-server-application`)
