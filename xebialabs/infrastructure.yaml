@@ -5,4 +5,8 @@ spec:
 - name: Infrastructure/aws cloud connection
   type: aws.Cloud
   accesskey: aaaaaaa
-  accessSecret: bbbbbbbbbb
+  accessSecret: bbbbbb
+  children:
+  - name: eu-west-3
+    type: aws.cloudformation.Stack
+    region: eu-west-3

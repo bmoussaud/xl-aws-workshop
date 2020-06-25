@@ -8,6 +8,7 @@ spec:
     type: udm.Environment
     members:
     - Infrastructure/aws cloud connection
+    - Infrastructure/aws cloud connection/eu-west-3
     dictionaries:
     - Environments/test/aws test configuration
   - name: aws test configuration

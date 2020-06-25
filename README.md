@@ -68,6 +68,8 @@ xlw apply -f xebialabs/application_tomcat.yaml
 * deploy `Applications/java-server-application/0.1.1` package in the same environment.
 * Once deployed, in the Infrastructure, 2 new configuration items representing the new `tomcat server` have been created and added to the environment. It follows the following pattern `Infrastructure/{{%instanceId%}}-host/tomcat-server` and `Infrastructure/{{%instanceId%}}-host/tomcat-server/tomcat.vh`
 
+Note the `0.1.2` is exactly the same role, excepte the devops as code definition is now externalized from the ansible role.
+
 ### Deploy the Web application
 
 * Right-click on the `Applications` node, and select `import from XLDeploy Server`
