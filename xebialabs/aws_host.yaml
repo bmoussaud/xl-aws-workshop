@@ -4,8 +4,23 @@ kind: Applications
 spec:
 - name: Applications/aws-host
   type: udm.Application
-  lastVersion: 1.0.0
+  lastVersion: 1.0.1
   children:
+  - name: 1.0.1
+    type: udm.DeploymentPackage
+    deployables:
+    - name: my-app-kp
+      type: aws.ec2.KeyPairSpec
+      keyPairName: my-app-keypair
+      region: eu-west-3
+      pemFilePath: ssh-keypairs/myapp-keypair.pem
+    - name: cloudformation definition
+      type: aws.cloudformation.Template
+      inputVariables:
+        InstanceType: t2.micro
+        SSHLocation: 0.0.0.0/0
+        KeyName: my-app-keypair
+      file: !file "artifacts/Applications/aws-host/1.0.1/cloudformation definition/EC2InstanceWithSecurityGroupSample.template.json"
   - name: 1.0.0
     type: udm.DeploymentPackage
     deployables:
@@ -20,11 +35,6 @@ spec:
       - Name:tomcat-security-group
       instanceType: t2.micro
       keyName: my-app-keypair
-    - name: my-app-kp
-      type: aws.ec2.KeyPairSpec
-      keyPairName: my-app-keypair
-      region: eu-west-3
-      pemFilePath: ssh-keypairs/myapp-keypair.pem
     - name: tomcat-sg
       type: aws.vpc.SecurityGroupSpec
       securityGroupName: tomcat-security-group
@@ -41,6 +51,11 @@ spec:
         protocol: TCP
         portRange: "22"
         source: 0.0.0.0/0
+    - name: my-app-kp
+      type: aws.ec2.KeyPairSpec
+      keyPairName: my-app-keypair
+      region: eu-west-3
+      pemFilePath: ssh-keypairs/myapp-keypair.pem
     templates:
     - name: sshost-template
       type: template.overthere.SshHost

@@ -1,5 +1,7 @@
 # AWS Workshop
 
+_Note_: all the workshop will run in AWS Paris Region `eu-west-3`. If you want to run it in another region, you'll need to update the packages.
+
 ## Setup
 
 on the machine running the XLDeploy Server.
@@ -57,9 +59,7 @@ xlw apply -f xebialabs/aws_host.yaml
 * Once deployed, in the Infrastructure, a new Configuration representing the new EC2 instance has been created and added to the environment. it follows the following pattern 'Infrastructure/{{%instanceId%}}-host'.
 * trigger the `check Connection` control task to validate it.
 
-### Provision tomcat using Ansible
-
-* apply the Devops-as-code defintions containing the deployment package containing the java-server-application package.
+Note: the `Applications/aws-host/1.0.1` performs the same deployment but using a cloudformation template instead. The new created host will be put into a dedicated environment.
 
 ```bash
 xlw apply -f xebialabs/application_tomcat.yaml
@@ -68,7 +68,7 @@ xlw apply -f xebialabs/application_tomcat.yaml
 * deploy `Applications/java-server-application/0.1.1` package in the same environment.
 * Once deployed, in the Infrastructure, 2 new configuration items representing the new `tomcat server` have been created and added to the environment. It follows the following pattern `Infrastructure/{{%instanceId%}}-host/tomcat-server` and `Infrastructure/{{%instanceId%}}-host/tomcat-server/tomcat.vh`
 
-Note the `0.1.2` is exactly the same role, excepte the devops as code definition is now externalized from the ansible role.
+Note the `Applications/java-server-application/0.1.2` apply exactly the same role, except the devops as code definition is now externalized from the ansible role. It shows it easier to reuse existing ansible roles.
 
 ### Deploy the Web application
 
