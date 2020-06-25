@@ -82,14 +82,14 @@ xlw apply -f xebialabs/application_tomcat.yaml
 ### Dump the state
 
 * using the XL command line, you can dump the complete state of
-  * the infrastructure `xl generate xl-deploy -p Infrastructure -f infrastructure.yaml`
+  * the infrastructure `xlw generate xl-deploy -p Infrastructure -f infrastructure.yaml`
   * the applications `xlw generate xl-deploy -p Applications -f app.yaml`
   * the environments `xlw generate xl-deploy -p Environments -f env.yaml`
 
 ### Undeploy
 
 * Undeploy the `PetClinic-war` app
-  * Environments/test/aws test/PetClinic-war)
+  * Environments/test/aws test/PetClinic-war
 * Undeploy the `java-server-application` app
   * Environments/test/aws test/java-server-application
 * Undeploy the `aws-host` app
@@ -113,14 +113,14 @@ in XLRelease, we'll design a template to orchestrate the tasks to provision and 
 * Add a Template, provide a name `Provision & Deploy`, Click on the create button
 * Click on `New Phase` to rename it `Phase 1`
 * Add Task, Select XLDeploy:Deploy, and provide a title, for example `Provision & Deploy`
-  * Application: `Applications/aws-host``
+  * Application: `Applications/aws-host`
   * Version: `1.0.0`
   * Environment: Fill with an environment you used previously
   * Click on `Assign to me` link
 
 ![image](images/schema-2.png)
 
-* Add Task, Select Core:Manuam, and provide a title, for example `check in the AWS console the new EC2 instance is up & ready`
+* Add Task, Select Core:Manual, and provide a title, for example `check in the AWS console the new EC2 instance is up & ready`
   * Description: Go to the AWS console, provide your credential and click on the EC2 Service.
   * Click on `Assign to me` link
 
@@ -130,15 +130,18 @@ in XLRelease, we'll design a template to orchestrate the tasks to provision and 
 
 ![image](images/schema-4.png)
 
+* Go to XLDeploy, Montoring & Deployment task and check the new task has been executed.
+
 ### Orchestration - phase 2
 
-* Duplicate the `Phase 1` and rename it `Phase 2`
+* Go to `my app` folder and edit the template.
+* Duplicate the `Phase 1` and rename it `Phase 2` by putting your mouse on the upper right side of the phase.
 * Edit the deployment task with the following properties
-  * Title: Install tomcat app server
+  * Title: Install tomcat app server (open the task and click on the title task)
   * Application: Applications/java-server-application
   * Version: 0.1.1
 * Edit the manual task with the following properties
-  * Title: Connect to the tomcat console
+  * Title: Connect to the tomcat console (open the task and click on the title task)
   * Description: using your browser, connect to <http://public_ip_of_machine:8080>
 * Create new release called `run-3`
 
@@ -161,7 +164,6 @@ in XLRelease, we'll design a template to orchestrate the tasks to provision and 
   * skip the 2 first manual tasks
 
 ![image](images/schema-7.png)
-
 
 ### Orchestration - phase 4
 
